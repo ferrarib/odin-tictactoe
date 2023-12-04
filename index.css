@@ -1,0 +1,73 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text&family=Roboto:wght@300&display=swap');
+
+html {
+    font-size: 20px;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.title {
+    color: white;
+    font-family: 'Big Shoulders Stencil Text', sans-serif;
+    font-size: 3rem;
+}
+
+.game-box {
+    width: 50%;
+    aspect-ratio: 9/6;
+    border-style: solid;
+    border-width: 5px;
+    border-image: linear-gradient(red, purple) 30;
+    border-radius: 15px;
+    
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#game-log {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+#game-field {
+    grid-area: 1 / 2 / 2 / 4;
+    box-sizing: border-box;
+    border-left-style: solid;
+    border-left-width: 5px;
+    border-image: linear-gradient(red, purple) 30;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-board {
+    display:grid;
+    width: 70%;
+    aspect-ratio: 1/1;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    border: 2px solid white;
+    border-radius: 5px;
+}
+
+.board-item {
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2.5rem;
+    font-family: 'Roboto';
+}
