@@ -32,20 +32,23 @@
 
     <dialog id="splash">
         <form class="splash-container" onsubmit="StartGame(event)">
-            <div class="player-marker">
-                <div>Pick a Marker, Player 1</div>
-                <div class="player1-option">
-                    <div>
-                        <label for="x">x</label>
-                        <input type="radio" name="marker" id="x" checked>
-                    </div>
-                    <div>
-                        <label for="o">o</label>
-                        <input type="radio" name="marker" id="o">
-                    </div>
-                </div>
+            <div class="player-name">
+                <label for="p1">Player 1 Name:</label>
+                <input type="text" name="p1" id="p1" required>
             </div>
-            <button>Play Game</button>
+            <div class="player-name">
+                <label for="p2">Player 2 Name:</label>
+                <input type="text" name="p2" id="p2" required>
+            </div>
+            <button class="play-game">Play Game</button>
+        </form>
+    </dialog>
+
+    <dialog id="game-over">
+        <form class="gameover-container" onsubmit="ResetGameWithCurrentPlayers(event)">
+            <div class="game-message"></div>
+            <button onclick="window.location.reload()" class="restart play-game">Restart</button>
+            <button type="submit" class="play-again play-game">Play Again</button>
         </form>
     </dialog>
 
