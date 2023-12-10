@@ -10,36 +10,65 @@ let squares = [
     [new Square(7), new Square(8), new Square(9)],
 ];
 
-function Player(id, marker){
-    this.id = id;
+function Player(marker){
     this.marker = marker;
 }
 
 
 const GameEngine = (function() {
-    let player1 = new Player(1, "X");
-    let player2 = new Player(2, "O");
-
-    let currentTurn = 0;
-
-    GetCurrentPlayer = function() {
-        if (currentTurn == 0){
-            return player1;
-        }
-        else {
-            return player2;
-        }
-    };
 
     ToggleTurn = function() {
-        if (currentTurn == 0)
-            currentTurn = 1;
-        else    
-            currentTurn = 0;
+        if (this.currentTurn == 1){
+            this.currentTurn = 2;
+            SetTurnDisplay(this.currentTurn);
+            return this.player1;
+        }
+        else {
+            this.currentTurn = 1;
+            SetTurnDisplay(this.currentTurn);
+            return this.player2;
+        }
     };
 
-    return {GetCurrentPlayer, ToggleTurn};
+    InitializeGame = function(player1, player2){
+        this.player1 = player1;
+        this.player2 = player2;
+
+        if (player1.marker == 'X'){
+            this.currentTurn = 1;
+        }
+        else {
+            this.currentTurn = 2;
+        }
+
+        SetTurnDisplay(this.currentTurn);
+    }
+
+    GetCurrentPlayer = function(){
+        return this.currentTurn;
+    }
+
+    return {InitializeGame, ToggleTurn, GetCurrentPlayer};
 })();
+
+var minutesLabel = document.getElementById("minutes");
+var secondsLabel = document.getElementById("seconds");
+var totalSeconds = 0;
+
+function setTime() {
+  ++totalSeconds;
+  secondsLabel.innerHTML = pad(totalSeconds % 60);
+  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+}
+
+function pad(val) {
+  var valString = val + "";
+  if (valString.length < 2) {
+    return "0" + valString;
+  } else {
+    return valString;
+  }
+}
 
 function DrawBoard(squares = null) {
     //The are which the board will be drawn
@@ -61,9 +90,8 @@ function DrawBoard(squares = null) {
             square.textContent = column.value;
 
             square.addEventListener('click', () => {
-                if (MakeMove(square.id, GameEngine.GetCurrentPlayer().marker)){
+                if (MakeMove(square.id)){
                     IsThereAWinner();
-                    GameEngine.ToggleTurn();
                 }
             })
 
@@ -75,14 +103,14 @@ function DrawBoard(squares = null) {
     gameField.appendChild(gameBoard);
 }
 
-function MakeMove(clickedSquare, move) {
+function MakeMove(clickedSquare) {
     let squaresFlattened = squares.flat();
     let square = squaresFlattened.find((item) => item.id == clickedSquare);
-    console.log(square);
 
     if (square.value == null) {
-        square.value = move;
-        console.log("placed marker");
+        console.log("Placed Marker for Player: ", GameEngine.GetCurrentPlayer());
+        let player = GameEngine.ToggleTurn()
+        square.value = player.marker;
         DrawBoard(squares);
         return true;
     }
@@ -92,11 +120,37 @@ function MakeMove(clickedSquare, move) {
 
 }
 
+function SetTurnDisplay(currentTurn){
+    const player1TurnDisplay = document.querySelector("#player1 .your-turn");
+    const player2TurnDisplay = document.querySelector("#player2 .your-turn");
+
+    player1TurnDisplay.style.visibility = currentTurn == 1 ? "visible" : "hidden";
+    player2TurnDisplay.style.visibility = currentTurn == 2 ? "visible" : "hidden";
+}
+
 function IsThereAWinner() {
 
 }
 
-DrawBoard(squares);
+function StartGame(e) {
+    e.preventDefault();
+    const dialog = document.querySelector("dialog");
+    dialog.style.visibility = "hidden";
+    dialog.close();
+    
+    DrawBoard(squares);
+    if (e.target[0].checked){
+        GameEngine.InitializeGame(new Player('X'), new Player('O'));
+    }
+    else {
+        GameEngine.InitializeGame(new Player('O'), new Player('X'));
+    }
 
-// MakeMove(4, "O");
-// MakeMove(5, "X");
+    setInterval(setTime, 1000);
+}
+
+const dialog = document.querySelector("dialog");
+dialog.showModal();
+
+
+

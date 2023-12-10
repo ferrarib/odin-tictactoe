@@ -1,8 +1,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text&family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text&family=Roboto:wght@300;400&display=swap');
 
 html {
     font-size: 20px;
+}
+
+* {
+    font-family: 'Roboto';
 }
 
 body {
@@ -33,7 +38,7 @@ body {
     border-radius: 15px;
     
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 }
 
 #game-log {
@@ -41,7 +46,7 @@ body {
 }
 
 #game-field {
-    grid-area: 1 / 2 / 2 / 4;
+    grid-area: 1 / 2 / 2 / 5;
     box-sizing: border-box;
     border-left-style: solid;
     border-left-width: 5px;
@@ -58,17 +63,84 @@ body {
     aspect-ratio: 1/1;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    border: 2px solid white;
+    border: 2px solid #DD403A;
     border-radius: 5px;
 }
 
 .board-item {
-    border: 2px solid white;
+    border: 2px solid #DD403A;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: #FFFCE8;
     font-size: 2.5rem;
-    font-family: 'Roboto';
     cursor: pointer;
+}
+
+#splash {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+    background-color: rgb(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.splash-container {
+    width: 300px;
+    height: 200px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    background-color: black;
+    color: white;
+    border: 4px solid red;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.player-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player1-option {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#game-log {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    justify-content: space-around;
+}
+
+#game-log * {
+    color: white;
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.your-turn {
+    font-size: 0.5rem;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    background-color: green;
+    width: fit-content;
+    border-radius: 5px;
+}
+
+.timer {
+    display: flex;
 }

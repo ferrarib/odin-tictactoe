@@ -1,21 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
     <div class="title">TIC TAC TOE</div>
     <div class="game-box">
         <div id="game-log">
-            
+            <div id="player1" class="player">
+                <div class="name">Player 1</div>
+                <div class="your-turn">Your Turn</div>
+            </div>
+            <div id="player2" class="player">
+                <div class="name">Player 2</div>
+                <div class="your-turn">Your Turn</div>
+            </div>
+            <div class="timer">
+                <div id="minutes">00</div>
+                :
+                <div id="seconds">00</div>
+            </div>
         </div>
         <div id="game-field">
         </div>
     </div>
 
+    <dialog id="splash">
+        <form class="splash-container" onsubmit="StartGame(event)">
+            <div class="player-marker">
+                <div>Pick a Marker, Player 1</div>
+                <div class="player1-option">
+                    <div>
+                        <label for="x">x</label>
+                        <input type="radio" name="marker" id="x" checked>
+                    </div>
+                    <div>
+                        <label for="o">o</label>
+                        <input type="radio" name="marker" id="o">
+                    </div>
+                </div>
+            </div>
+            <button>Play Game</button>
+        </form>
+    </dialog>
+
     <script src="index.js"></script>
 </body>
+
 </html>
